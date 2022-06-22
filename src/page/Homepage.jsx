@@ -22,8 +22,6 @@ const Homepage = () => {
     const [alertMessage, setAlertMessage] = useState('')
     const [alertColor, setAlertColor] = useState('')
     
-    
-    
     const fetchDataTask = async () => {
         FetchData(
         'https://api.todoist.com/rest/v1/tasks?project_id=2293674381',
@@ -115,11 +113,11 @@ const Homepage = () => {
         setSnackbar(false)
     }
 
-    const search = (e) => {
+    const searchTask = (e) => {
         const searchName = e.target.value
         if (searchName.length > 0) {
-            const idx = task.filter((taskSearch) => taskSearch.content.toLowerCase() === searchName.toLowerCase())
-            setDisplay(idx)
+            const findTask = task.filter((taskSearch) => taskSearch.content.toLowerCase() === searchName.toLowerCase())
+            setDisplay(findTask)
         } else {
             setDisplay(task)
         }
@@ -138,7 +136,7 @@ const Homepage = () => {
                 </Wrapper>
                 <Wrapper title="List Task">
                     <div className='my-4'>
-                        <TextField id="outlined-basic" label="Search Task..." variant="outlined" className='w-full' onChange={(e) =>search(e)} />
+                        <TextField id="outlined-basic" label="Search Task..." variant="outlined" className='w-full' onChange={(e) =>searchTask(e)} />
                     </div>
                     {display.length > 0 ? (
                         <div className='grid grid-cols-1 xl:grid-cols-3 gap-2'>
@@ -156,10 +154,10 @@ const Homepage = () => {
                                     )
                                 })}
                             </div>) : (
-                            <div className='flex flex-col h-[50vh] items-center justify-center'>
-                                <p className='text-slate-400 text-xl xl:text-5xl'> No Results </p>
-                                <p className='font-bold mt-4'>Clear search to show all task</p>
-                            </div>
+                        <div className='flex flex-col h-[50vh] items-center justify-center'>
+                            <p className='text-slate-400 text-xl xl:text-5xl'> No Results </p>
+                            <p className='font-bold mt-4'>Clear search to show all task</p>
+                        </div>
                     )}
                     <Snackbar
                         anchorOrigin={{vertical:'top',horizontal:'center'}}
